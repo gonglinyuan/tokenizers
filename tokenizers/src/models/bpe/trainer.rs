@@ -184,7 +184,7 @@ pub struct BpeTrainer {
     /// An optional suffix to caracterize and end-of-word subword
     pub end_of_word_suffix: Option<String>,
 
-    words: HashMap<String, u32>,
+    words: HashMap<String, u64>,
 }
 
 impl Default for BpeTrainer {
