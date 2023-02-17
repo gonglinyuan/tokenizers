@@ -10,7 +10,7 @@ use std::collections::HashMap;
 pub struct WordLevelTrainer {
     /// The minimum frequency a word must have to be part of the vocabulary
     #[builder(default = "0")]
-    pub min_frequency: u32,
+    pub min_frequency: u64,
     /// The target vocabulary size
     #[builder(default = "30_000")]
     pub vocab_size: usize,
