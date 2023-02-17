@@ -68,7 +68,7 @@ impl WordLevelTrainer {
                     )
                     .take(self.vocab_size)
                     .enumerate()
-                    .map(|(i, w)| (w, i as u64))
+                    .map(|(i, w)| (w, i as u32))
                     .collect(),
             )
             .build()?;

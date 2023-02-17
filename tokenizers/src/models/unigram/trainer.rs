@@ -242,7 +242,7 @@ impl UnigramTrainer {
 
         // Fill seed_sentencepieces
         for (count, character) in sall_chars {
-            seed_sentencepieces.push((character.to_string(), count.into()));
+            seed_sentencepieces.push((character.to_string(), count as f64));
         }
 
         // sort by decreasing score
@@ -413,7 +413,7 @@ impl UnigramTrainer {
         let mut objs: f64 = 0.0;
         let mut ntokens: u32 = 0;
 
-        let all_sentence_freq: u32 = sentences.iter().map(|(_a, b)| *b).sum();
+        let all_sentence_freq: u64 = sentences.iter().map(|(_a, b)| *b).sum();
 
         // TODO reparallelize this.
         for (string, freq) in sentences {
