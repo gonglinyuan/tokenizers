@@ -12,7 +12,7 @@ use std::convert::TryInto;
 type SentencePiece = (String, f64);
 
 // A full sentence or word + it's count within the dataset
-type Sentence = (String, u32);
+type Sentence = (String, u64);
 
 fn digamma(mut x: f64) -> f64 {
     let mut result = 0.0;
@@ -62,7 +62,7 @@ pub struct UnigramTrainer {
     #[builder(default = "1_000_000")]
     seed_size: usize,
     #[builder(default = "HashMap::new()")]
-    words: HashMap<String, u32>,
+    words: HashMap<String, u64>,
 }
 
 impl Default for UnigramTrainer {
@@ -194,7 +194,7 @@ impl UnigramTrainer {
             .sum::<usize>()
             + sentences.len();
         let mut flat_string = String::with_capacity(total);
-        let mut all_chars: HashMap<char, u32> = HashMap::new();
+        let mut all_chars: HashMap<char, u64> = HashMap::new();
         let c_sentence_boundary = '\0';
         let k_sentence_boundary = '\0'.to_string();
         for (string, n) in sentences {
@@ -568,7 +568,7 @@ impl Trainer for UnigramTrainer {
         S: AsRef<str> + Send,
         F: Fn(&str) -> Result<Vec<String>> + Sync,
     {
-        let words: Result<HashMap<String, u32>> = iterator
+        let words: Result<HashMap<String, u64>> = iterator
             .maybe_par_bridge()
             .map(|sequence| {
                 let words = process(sequence.as_ref())?;
